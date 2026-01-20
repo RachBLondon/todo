@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
+/* Lofi color palette */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --lofi-cream: #F5F1E8;
+  --lofi-tan: #E8DCC4;
+  --lofi-brown: #8B7355;
+  --lofi-accent: #D4A574;
+  --lofi-muted: #C4B5A0;
+  --lofi-dark: #4A3F35;
+
+  --background: var(--lofi-cream);
+  --foreground: var(--lofi-brown);
+  --card-bg: var(--lofi-tan);
+  --border: var(--lofi-muted);
+  --accent: var(--lofi-accent);
 }
 
 @theme inline {
+  /* Lofi colors */
+  --color-lofi-cream: var(--lofi-cream);
+  --color-lofi-tan: var(--lofi-tan);
+  --color-lofi-brown: var(--lofi-brown);
+  --color-lofi-accent: var(--lofi-accent);
+  --color-lofi-muted: var(--lofi-muted);
+  --color-lofi-dark: var(--lofi-dark);
+
+  /* Base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Courier New', monospace;
+
+  /* Shadows */
+  --shadow-lofi: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-lofi-lg: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ASCII art styling */
+.ascii-art {
+  font-family: var(--font-mono);
+  line-height: 1.2;
+  white-space: pre;
+  color: var(--lofi-dark);
+}
+
+/* Smooth transitions */
+* {
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* Custom scrollbar (lofi style) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--lofi-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--lofi-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--lofi-accent);
 }
