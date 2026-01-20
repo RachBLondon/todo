@@ -38,7 +38,7 @@ export default async function LeaderboardPage() {
       return {
         id: profile.id,
         username: profile.username,
-        streak: (streakData as number) || 0,
+        streak: typeof streakData === 'number' ? streakData : 0,
       };
     })
   );
