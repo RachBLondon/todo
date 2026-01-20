@@ -1,6 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import type { LeaderboardEntryWithRank } from '@/types/leaderboard';
+import { getAvatarPath } from '@/lib/utils/avatar';
 
 interface LeaderboardTableProps {
   entries: LeaderboardEntryWithRank[];
@@ -9,56 +11,44 @@ interface LeaderboardTableProps {
 export function LeaderboardTable({ entries }: LeaderboardTableProps) {
   if (entries.length === 0) {
     return (
-      <div className="text-center py-12 text-lofi-muted">
-        No entries yet. Be the first to build a streak!
+      <div className="text-center py-8 text-sm text-lofi-muted">
+        No entries yet
       </div>
     );
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full">
-        <thead>
-          <tr className="border-b-2 border-lofi-muted">
-            <th className="text-left py-3 px-4 text-lofi-dark font-semibold">Rank</th>
-            <th className="text-left py-3 px-4 text-lofi-dark font-semibold">User</th>
-            <th className="text-right py-3 px-4 text-lofi-dark font-semibold">Streak</th>
-          </tr>
-        </thead>
-        <tbody>
-          {entries.map((entry) => (
-            <tr
-              key={entry.id}
-              className={`border-b border-lofi-muted transition-all ${
-                entry.isCurrentUser
-                  ? 'bg-lofi-accent/20 font-semibold'
-                  : 'hover:bg-lofi-tan/50'
-              }`}
-            >
-              <td className="py-3 px-4 text-lofi-brown">
-                <div className="flex items-center gap-2">
-                  {entry.medal && <span className="text-2xl">{entry.medal}</span>}
-                  <span>{entry.rank}</span>
-                </div>
-              </td>
-              <td className="py-3 px-4 text-lofi-brown">
-                {entry.username}
-                {entry.isCurrentUser && (
-                  <span className="ml-2 text-xs bg-lofi-accent text-lofi-dark px-2 py-0.5 rounded">
-                    You
-                  </span>
-                )}
-              </td>
-              <td className="py-3 px-4 text-right">
-                <div className="flex items-center justify-end gap-2">
-                  <span className="text-xl">🔥</span>
-                  <span className="font-semibold text-lofi-dark">{entry.streak}</span>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="space-y-1">
+      {entries.map((entry) => (
+        <div
+          key={entry.id}
+          className={`flex items-center gap-3 py-2.5 px-3 rounded-lg ${
+            entry.isCurrentUser
+              ? 'bg-accent-orange/10'
+              : 'hover:bg-lofi-muted/5'
+          }`}
+        >
+          <span className="w-6 text-sm text-lofi-muted tabular-nums">
+            {entry.rank}
+          </span>
+          <Image
+            src={getAvatarPath(entry.id)}
+            alt=""
+            width={28}
+            height={28}
+            className="w-7 h-7 rounded-full"
+          />
+          <span className={`flex-1 text-sm ${entry.isCurrentUser ? 'font-medium text-lofi-dark' : 'text-lofi-dark'}`}>
+            {entry.username}
+            {entry.isCurrentUser && (
+              <span className="ml-2 text-xs text-accent-orange">you</span>
+            )}
+          </span>
+          <span className="text-sm text-lofi-muted tabular-nums">
+            {entry.streak}d
+          </span>
+        </div>
+      ))}
     </div>
   );
 }

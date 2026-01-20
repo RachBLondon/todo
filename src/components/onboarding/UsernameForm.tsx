@@ -71,7 +71,7 @@ export function UsernameForm({ userId, onComplete }: UsernameFormProps) {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="your_username"
+          placeholder="JaneDoe123"
           error={error}
           disabled={isLoading}
           autoFocus

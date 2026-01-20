@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
-import localFont from "next/font/local";
+import { Open_Sans, Cormorant_Garamond } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
 import "./globals.css";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
   variable: "--font-open-sans",
 });
 
-const adigiana = localFont({
-  src: "../fonts/AdigianaToyboxRegular.ttf",
-  variable: "--font-heading",
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cormorant",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${openSans.variable} ${adigiana.variable} antialiased`}>
+      <body className={`${openSans.variable} ${cormorantGaramond.variable} antialiased`}>
         {children}
         <Toaster
           position="bottom-right"

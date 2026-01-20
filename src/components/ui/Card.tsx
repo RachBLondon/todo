@@ -6,12 +6,12 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className = '', padding = 'md', children, ...props }, ref) => {
-    const baseStyles = 'bg-lofi-tan border border-lofi-muted rounded-lg';
+    const baseStyles = 'bg-[#F2EFE8] rounded-xl';
 
     const paddings = {
       none: '',
-      sm: 'p-3',
-      md: 'p-4',
+      sm: 'p-4',
+      md: 'p-5',
       lg: 'p-6',
     };
 
@@ -19,7 +19,6 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={`${baseStyles} ${paddings[padding]} ${className}`}
-        style={{ boxShadow: 'var(--shadow-lofi)' }}
         {...props}
       >
         {children}

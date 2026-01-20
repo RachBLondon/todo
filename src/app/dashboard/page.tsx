@@ -1,9 +1,10 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { WeekdayIndicator } from '@/components/dashboard/WeekdayIndicator';
-import { StreakStats } from '@/components/dashboard/StreakStats';
+import { DateStreakBar } from '@/components/dashboard/DateStreakBar';
+import { WeekStrip } from '@/components/dashboard/WeekStrip';
 import { TaskList } from '@/components/tasks/TaskList';
 import { HabitList } from '@/components/habits/HabitList';
+import { OnboardingGuide } from '@/components/onboarding/OnboardingGuide';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -17,15 +18,18 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <WeekdayIndicator />
+    <>
+      <OnboardingGuide />
+      <div className="space-y-5">
+        <DateStreakBar userId={user.id} />
 
-      <StreakStats userId={user.id} />
+        <WeekStrip userId={user.id} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <TaskList userId={user.id} />
-        <HabitList userId={user.id} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <TaskList userId={user.id} />
+          <HabitList userId={user.id} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

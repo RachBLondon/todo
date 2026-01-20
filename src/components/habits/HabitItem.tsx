@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { Checkbox } from '../ui/Checkbox';
-import { StreakBadge } from './StreakBadge';
 import { createClient } from '@/lib/supabase/client';
 import { canInteract, getDateString } from '@/lib/utils/dates';
 import type { HabitWithStreak } from '@/types/habits';
@@ -53,23 +52,26 @@ export function HabitItem({ habit, onUpdate }: HabitItemProps) {
   };
 
   return (
-    <div className="flex items-center gap-4 p-4 bg-lofi-cream rounded-md border border-lofi-muted hover:border-lofi-accent transition-all">
+    <div className="flex items-center gap-3 py-2.5 px-3 rounded-lg hover:bg-lofi-muted/5 transition-colors">
       <Checkbox
         checked={habit.completedToday}
         onChange={handleToggle}
         disabled={!canCheck || isUpdating}
       />
 
-      <span className="text-2xl">{habit.emoji}</span>
+      <span
+        className={`flex-1 text-base ${
+          habit.completedToday ? 'text-lofi-muted' : 'text-lofi-dark'
+        }`}
+      >
+        {habit.title}
+      </span>
 
-      <div className="flex-1">
-        <h3 className="font-medium text-lofi-brown">{habit.title}</h3>
-        {!canCheck && (
-          <p className="text-xs text-lofi-muted">Rest day 🌴</p>
-        )}
-      </div>
-
-      <StreakBadge streak={habit.streak} />
+      {habit.streak > 0 && (
+        <span className="text-xs text-lofi-muted tabular-nums">
+          {habit.streak}d
+        </span>
+      )}
     </div>
   );
 }

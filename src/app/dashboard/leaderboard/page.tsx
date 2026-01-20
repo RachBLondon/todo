@@ -1,9 +1,7 @@
 import { redirect } from 'next/navigation';
-import Image from 'next/image';
 import { createClient } from '@/lib/supabase/server';
 import { Card } from '@/components/ui/Card';
 import { LeaderboardTable } from '@/components/leaderboard/LeaderboardTable';
-import { UserRankCard } from '@/components/leaderboard/UserRankCard';
 import type { LeaderboardEntryWithRank, UserRank } from '@/types/leaderboard';
 
 export default async function LeaderboardPage() {
@@ -71,31 +69,20 @@ export default async function LeaderboardPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-lofi-dark mb-2 flex items-center gap-3">
-          <Image src="/icons/leader-board.png" alt="" width={32} height={32} />
+      <div className="flex items-center justify-between">
+        <h1 className="text-lg font-semibold text-lofi-dark">
           Leaderboard
         </h1>
-        <p className="text-lofi-brown">
-          Top streakers worldwide. Weekdays only, one day at a time.
-        </p>
+        {userRank && (
+          <span className="text-sm text-lofi-muted">
+            You are #{userRank.rank} of {userRank.totalUsers}
+          </span>
+        )}
       </div>
-
-      {userRank && currentUserEntry && (
-        <UserRankCard rank={userRank} streak={currentUserEntry.streak} />
-      )}
 
       <Card>
-        <h2 className="text-xl font-bold text-lofi-dark mb-4">
-          Top 100 Streaks
-        </h2>
         <LeaderboardTable entries={entriesWithRanks.slice(0, 100)} />
       </Card>
-
-      <div className="text-center text-sm text-lofi-muted">
-        <p>Streaks update in real-time based on habit completions</p>
-        <p className="mt-1">Keep showing up to climb the ranks!</p>
-      </div>
     </div>
   );
 }

@@ -1,14 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { Card } from '../ui/Card';
-import { Button } from '../ui/Button';
 import { HabitItem } from './HabitItem';
 import { EditHabitsModal } from './EditHabitsModal';
 import { getDateString } from '@/lib/utils/dates';
-import { MAX_ACTIVE_HABITS } from '@/lib/utils/validation';
 import type { Habit, HabitWithStreak } from '@/types/habits';
 
 interface HabitListProps {
@@ -75,31 +72,27 @@ export function HabitList({ userId }: HabitListProps) {
     <>
       <Card>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-lofi-dark flex items-center gap-2">
-            <Image src="/icons/Habits.png" alt="" width={24} height={24} />
-            Habits
-          </h2>
+          <p className="text-lg font-bold text-lofi-dark">Habits</p>
           <div className="flex items-center gap-3">
             <span className="text-sm text-lofi-muted">
-              {completedCount}/{habits.length} today
+              {completedCount} / {habits.length} completed
             </span>
-            <Button
-              variant="ghost"
-              size="sm"
+            <button
               onClick={() => setShowEditModal(true)}
+              className="text-sm text-lofi-muted hover:text-lofi-dark transition-colors"
             >
-              ✏️ Edit
-            </Button>
+              Edit
+            </button>
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-2">
           {isLoading ? (
-            <div className="text-center py-8 text-lofi-muted">
-              Loading habits...
+            <div className="text-center py-6 text-sm text-lofi-muted">
+              Loading...
             </div>
           ) : habits.length === 0 ? (
-            <div className="text-center py-8 text-lofi-muted">
+            <div className="text-center py-6 text-sm text-lofi-muted">
               No habits set up yet
             </div>
           ) : (
@@ -110,13 +103,6 @@ export function HabitList({ userId }: HabitListProps) {
                 onUpdate={loadHabits}
               />
             ))
-          )}
-
-          {/* Show empty slots */}
-          {habits.length < MAX_ACTIVE_HABITS && (
-            <div className="text-center py-4 text-sm text-lofi-muted">
-              {MAX_ACTIVE_HABITS - habits.length} empty habit slot{MAX_ACTIVE_HABITS - habits.length !== 1 ? 's' : ''}
-            </div>
           )}
         </div>
       </Card>

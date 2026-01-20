@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { Card } from '../ui/Card';
 import { TaskItem } from './TaskItem';
@@ -44,24 +43,20 @@ export function TaskList({ userId }: TaskListProps) {
   return (
     <Card>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-lofi-dark flex items-center gap-2">
-          <Image src="/icons/Tasks.png" alt="" width={24} height={24} />
-          Tasks
-        </h2>
+        <p className="text-lg font-bold text-lofi-dark">Tasks</p>
         <span className="text-sm text-lofi-muted">
-          {tasks.length}/{MAX_TASKS_PER_DAY} tasks
-          {tasks.length > 0 && ` • ${completedCount} done`}
+          {completedCount} / {MAX_TASKS_PER_DAY} completed
         </span>
       </div>
 
-      <div className="space-y-3 mb-4">
+      <div className="space-y-2 mb-4">
         {isLoading ? (
-          <div className="text-center py-8 text-lofi-muted">
-            Loading tasks...
+          <div className="text-center py-6 text-sm text-lofi-muted">
+            Loading...
           </div>
         ) : tasks.length === 0 ? (
-          <div className="text-center py-8 text-lofi-muted">
-            No tasks yet. Add one below! 📝
+          <div className="text-center py-6 text-sm text-lofi-muted">
+            No tasks yet
           </div>
         ) : (
           tasks.map((task) => (

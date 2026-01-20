@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
+html {
+  font-size: 20px; /* default */
+}
+
 /* Color palette */
 :root {
   --background: #f4e4c3;
-  --foreground: #333333;
-  --card-bg: #ffffff;
+  --foreground: #1a1a1a;
+  --card-bg: #E3C8BB;
   --border: #e0d5c4;
   --accent-orange: #f59d06;
   --accent-blue: #0987c7;
-  --muted: #888888;
-  --dark: #222222;
+  --muted: #666666;
+  --dark: #1a1a1a;
 
   /* Legacy lofi vars for compatibility */
   --lofi-cream: var(--background);
@@ -36,7 +40,8 @@
   --color-foreground: var(--foreground);
 
   /* Typography */
-  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-open-sans), "Open Sans", system-ui, sans-serif;
+  --font-body: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   --font-mono: 'Courier New', monospace;
 
   /* Shadows */
@@ -47,14 +52,38 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headings use custom font */
+/* Headings use bold Open Sans */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+
+/* Small UI text uses Open Sans */
+.font-ui {
+  font-family: var(--font-sans);
+}
+
+/* UI elements use Open Sans */
+button, input, select, textarea, nav, label {
+  font-family: var(--font-sans);
+}
+
+/* Small text sizes use Open Sans for legibility */
+.text-xs, .text-sm, .text-\[10px\], .text-\[11px\], .text-\[12px\] {
+  font-family: var(--font-sans);
+}
+
+/* Landing page subtle background */
+.landing-bg {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(245, 157, 6, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(9, 135, 199, 0.04) 0%, transparent 40%),
+    var(--background);
 }
 
 /* ASCII art styling */

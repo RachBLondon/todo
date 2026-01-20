@@ -1,9 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Input } from '../ui/Input';
-import { Button } from '../ui/Button';
-import { EmojiPicker } from '../ui/EmojiPicker';
 import { createClient } from '@/lib/supabase/client';
 import { validateTaskTitle, MAX_TASKS_PER_DAY } from '@/lib/utils/validation';
 import { getDateString, canInteract } from '@/lib/utils/dates';
@@ -16,7 +13,6 @@ interface AddTaskFormProps {
 
 export function AddTaskForm({ userId, currentTaskCount, onTaskAdded }: AddTaskFormProps) {
   const [title, setTitle] = useState('');
-  const [emoji, setEmoji] = useState('📌');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -53,7 +49,7 @@ export function AddTaskForm({ userId, currentTaskCount, onTaskAdded }: AddTaskFo
         .insert({
           user_id: userId,
           title: title.trim(),
-          emoji,
+          emoji: '📌',
           task_date: today,
           completed: false,
         });
@@ -61,7 +57,6 @@ export function AddTaskForm({ userId, currentTaskCount, onTaskAdded }: AddTaskFo
       if (insertError) throw insertError;
 
       setTitle('');
-      setEmoji('📌');
       onTaskAdded();
     } catch (err: any) {
       setError(err.message || 'Failed to add task');
@@ -72,47 +67,39 @@ export function AddTaskForm({ userId, currentTaskCount, onTaskAdded }: AddTaskFo
 
   if (!canInteract()) {
     return (
-      <div className="p-4 bg-lofi-tan/50 rounded-md border border-lofi-muted text-center">
-        <p className="text-lofi-brown">
-          🌴 It's the weekend - enjoy your rest!
-        </p>
-        <p className="text-sm text-lofi-muted mt-1">
-          Tasks are for weekdays only
+      <div className="py-3 text-center">
+        <p className="text-sm text-lofi-muted">
+          Weekend - tasks resume Monday
         </p>
       </div>
     );
   }
 
+  if (currentTaskCount >= MAX_TASKS_PER_DAY) {
+    return null;
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
-      <div className="flex gap-3">
-        <EmojiPicker
-          value={emoji}
-          onChange={setEmoji}
+    <form onSubmit={handleSubmit}>
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Add a task..."
+          disabled={!canAddTask || isSubmitting}
+          className="flex-1 px-3 py-2.5 text-base bg-lofi-muted/5 border-0 rounded-lg placeholder:text-lofi-muted/50 focus:outline-none focus:ring-2 focus:ring-accent-orange/30"
         />
-
-        <div className="flex-1">
-          <Input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Add a task..."
-            disabled={!canAddTask || isSubmitting}
-            error={error}
-          />
-        </div>
-
-        <Button
+        <button
           type="submit"
           disabled={!canAddTask || !title.trim() || isSubmitting}
+          className="px-4 py-2 text-sm font-medium text-white bg-lofi-dark rounded-lg hover:bg-lofi-dark/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
-          {isSubmitting ? '...' : 'Add'}
-        </Button>
+          Add
+        </button>
       </div>
-
-      {currentTaskCount >= MAX_TASKS_PER_DAY && (
-        <p className="text-sm text-lofi-muted text-center">
-          Maximum {MAX_TASKS_PER_DAY} tasks per day reached
-        </p>
+      {error && (
+        <p className="mt-2 text-xs text-red-500">{error}</p>
       )}
     </form>
   );

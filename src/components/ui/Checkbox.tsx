@@ -17,13 +17,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           ref={ref}
           type="checkbox"
           id={checkboxId}
-          className={`w-5 h-5 rounded border-2 border-lofi-muted text-lofi-accent focus:ring-2 focus:ring-lofi-accent focus:ring-offset-0 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 transition-all ${className}`}
+          className={`w-5 h-5 rounded accent-[#0987c7] bg-white focus:ring-2 focus:ring-[#0987c7]/20 focus:ring-offset-0 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 transition-all ${className}`}
           {...props}
         />
         {label && (
           <label
             htmlFor={checkboxId}
-            className="text-lofi-brown cursor-pointer select-none"
+            className="text-sm text-lofi-dark cursor-pointer select-none"
           >
             {label}
           </label>
