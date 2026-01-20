@@ -1,36 +1,42 @@
 @import "tailwindcss";
 
-/* Lofi color palette */
+/* Color palette */
 :root {
-  --lofi-cream: #F5F1E8;
-  --lofi-tan: #E8DCC4;
-  --lofi-brown: #8B7355;
-  --lofi-accent: #D4A574;
-  --lofi-muted: #C4B5A0;
-  --lofi-dark: #4A3F35;
+  --background: #f4e4c3;
+  --foreground: #333333;
+  --card-bg: #ffffff;
+  --border: #e0d5c4;
+  --accent-orange: #f59d06;
+  --accent-blue: #0987c7;
+  --muted: #888888;
+  --dark: #222222;
 
-  --background: var(--lofi-cream);
-  --foreground: var(--lofi-brown);
-  --card-bg: var(--lofi-tan);
-  --border: var(--lofi-muted);
-  --accent: var(--lofi-accent);
+  /* Legacy lofi vars for compatibility */
+  --lofi-cream: var(--background);
+  --lofi-tan: var(--card-bg);
+  --lofi-brown: var(--foreground);
+  --lofi-accent: var(--accent-orange);
+  --lofi-muted: var(--muted);
+  --lofi-dark: var(--dark);
 }
 
 @theme inline {
-  /* Lofi colors */
-  --color-lofi-cream: var(--lofi-cream);
-  --color-lofi-tan: var(--lofi-tan);
-  --color-lofi-brown: var(--lofi-brown);
-  --color-lofi-accent: var(--lofi-accent);
-  --color-lofi-muted: var(--lofi-muted);
-  --color-lofi-dark: var(--lofi-dark);
+  /* Colors */
+  --color-lofi-cream: var(--background);
+  --color-lofi-tan: var(--card-bg);
+  --color-lofi-brown: var(--foreground);
+  --color-lofi-accent: var(--accent-orange);
+  --color-lofi-muted: var(--muted);
+  --color-lofi-dark: var(--dark);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-blue: var(--accent-blue);
 
   /* Base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
   /* Typography */
-  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Courier New', monospace;
 
   /* Shadows */
@@ -44,6 +50,11 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings use custom font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ASCII art styling */
@@ -60,21 +71,21 @@ body {
   transition-timing-function: ease-in-out;
 }
 
-/* Custom scrollbar (lofi style) */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--lofi-cream);
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--lofi-muted);
+  background: var(--border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--lofi-accent);
+  background: var(--accent-orange);
 }

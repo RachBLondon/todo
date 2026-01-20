@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { Card } from '../ui/Card';
 import { TaskItem } from './TaskItem';
@@ -43,8 +44,9 @@ export function TaskList({ userId }: TaskListProps) {
   return (
     <Card>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-lofi-dark">
-          Today&apos;s Tasks
+        <h2 className="text-xl font-bold text-lofi-dark flex items-center gap-2">
+          <Image src="/icons/Tasks.png" alt="" width={24} height={24} />
+          Tasks
         </h2>
         <span className="text-sm text-lofi-muted">
           {tasks.length}/{MAX_TASKS_PER_DAY} tasks

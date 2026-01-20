@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/server';
 import { Card } from '@/components/ui/Card';
 import { LeaderboardTable } from '@/components/leaderboard/LeaderboardTable';
@@ -71,7 +72,10 @@ export default async function LeaderboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-lofi-dark mb-2">Leaderboard 🏆</h1>
+        <h1 className="text-3xl font-bold text-lofi-dark mb-2 flex items-center gap-3">
+          <Image src="/icons/leader-board.png" alt="" width={32} height={32} />
+          Leaderboard
+        </h1>
         <p className="text-lofi-brown">
           Top streakers worldwide. Weekdays only, one day at a time.
         </p>

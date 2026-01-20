@@ -1,6 +1,18 @@
 import type { Metadata } from "next";
+import { Open_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { Toaster } from 'react-hot-toast';
 import "./globals.css";
+
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+});
+
+const adigiana = localFont({
+  src: "../fonts/AdigianaToyboxRegular.ttf",
+  variable: "--font-heading",
+});
 
 export const metadata: Metadata = {
   title: "locked in 🔒 - Daily Task & Habit Tracker",
@@ -14,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className={`${openSans.variable} ${adigiana.variable} antialiased`}>
         {children}
         <Toaster
           position="bottom-right"

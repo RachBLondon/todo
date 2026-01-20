@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { Card } from '../ui/Card';
 
@@ -38,13 +39,13 @@ export function StreakStats({ userId }: StreakStatsProps) {
   }
 
   return (
-    <Card className="bg-gradient-to-br from-lofi-accent to-lofi-tan border-2 border-lofi-accent">
+    <Card className="border-2 border-accent-orange">
       <div className="text-center">
-        <p className="text-sm text-lofi-dark font-medium mb-2">
+        <p className="text-sm text-lofi-dark font-medium mb-2 flex items-center justify-center gap-2">
+          <Image src="/icons/streaks.png" alt="" width={20} height={20} />
           Your Overall Streak
         </p>
         <div className="flex items-center justify-center gap-2">
-          <span className="text-4xl animate-pulse">🔥</span>
           <span className="text-4xl font-bold text-lofi-dark">
             {overallStreak}
           </span>

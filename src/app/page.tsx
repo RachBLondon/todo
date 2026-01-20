@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { AsciiHeader } from '@/components/layout/AsciiHeader';
 import { GoogleSignInButton } from '@/components/auth/GoogleSignInButton';
 import { Card } from '@/components/ui/Card';
@@ -10,7 +11,7 @@ export default function Home() {
 
         <Card className="mt-8 text-center">
           <h1 className="text-2xl font-bold text-lofi-dark mb-4">
-            Stay Consistent. Build Momentum. 🚀
+            Stay Consistent. Build Momentum.
           </h1>
 
           <p className="text-lofi-brown mb-6 max-w-md mx-auto">
@@ -28,11 +29,23 @@ export default function Home() {
             <h2 className="text-lg font-semibold text-lofi-dark mb-3">
               How it works
             </h2>
-            <div className="text-left text-lofi-brown space-y-2">
-              <p>📝 <strong>Tasks:</strong> Max 3 per day (weekdays only)</p>
-              <p>✅ <strong>Habits:</strong> Set 5 core habits during onboarding</p>
-              <p>🔥 <strong>Streaks:</strong> Consecutive weekdays completed</p>
-              <p>🏆 <strong>Leaderboard:</strong> Compete with others globally</p>
+            <div className="text-left text-lofi-brown space-y-3">
+              <p className="flex items-center gap-2">
+                <Image src="/icons/Tasks.png" alt="" width={20} height={20} />
+                <span><strong>Tasks:</strong> Max 3 per day (weekdays only)</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <Image src="/icons/Habits.png" alt="" width={20} height={20} />
+                <span><strong>Habits:</strong> Set 5 core habits during onboarding</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <Image src="/icons/streaks.png" alt="" width={20} height={20} />
+                <span><strong>Streaks:</strong> Consecutive weekdays completed</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <Image src="/icons/leader-board.png" alt="" width={20} height={20} />
+                <span><strong>Leaderboard:</strong> Compete with others globally</span>
+              </p>
             </div>
           </div>
         </div>
